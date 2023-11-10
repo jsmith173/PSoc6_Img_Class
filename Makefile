@@ -68,7 +68,7 @@ TOOLCHAIN=GCC_ARM
 CONFIG=Debug
 
 # If set to "true" or "1", display full command-lines when building.
-VERBOSE=
+VERBOSE=1
 
 
 ################################################################################
@@ -96,15 +96,11 @@ DISABLE_COMPONENTS=
 # by default, or otherwise not found by the build system.
 SOURCES=
 
-# Like SOURCES, but for include directories. Value should be paths to
-# directories (without a leading -I).
-INCLUDES=
-
 # Add additional defines to the build process (without a leading -D).
 DEFINES=
 
 # Select softfp or hardfp floating point. Default is softfp.
-VFP_SELECT=
+VFP_SELECT=hardfp
 
 # Additional / custom C compiler flags.
 #
@@ -137,7 +133,7 @@ LINKER_SCRIPT=
 PREBUILD=
 
 # Custom post-build commands to run.
-POSTBUILD=
+POSTBUILD=$(CY_TOOLS_DIR)/gcc/bin/arm-none-eabi-objdump.exe -S ./build/$(TARGET)/Debug/$(APPNAME).elf > ./build/$(TARGET)/Debug/$(APPNAME).list
 
 
 ################################################################################
@@ -168,6 +164,13 @@ CY_GETLIBS_SHARED_NAME=mtb_shared
 # software provided compiler by default).
 CY_COMPILER_PATH=
 
+MTB_SHARED_DIR=$(CY_GETLIBS_SHARED_PATH)$(CY_GETLIBS_SHARED_NAME)
+
+ML_TFLITE_MICRO_DS=$(MTB_SHARED_DIR)/ml-tflite-micro-ds/tflite-micro
+
+# Like SOURCES, but for include directories. Value should be paths to
+# directories (without a leading -I).
+INCLUDES=$(ML_TFLITE_MICRO_DS) $(ML_TFLITE_MICRO_DS)/third_party/flatbuffers/include
 
 # Locate ModusToolbox helper tools folders in default installation
 # locations for Windows, Linux, and macOS.
