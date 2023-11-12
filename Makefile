@@ -106,22 +106,19 @@ VFP_SELECT=hardfp
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
 # above.
-CFLAGS=
+CFLAGS=-std=c11
 
 # Additional / custom C++ compiler flags.
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
 # above.
-CXXFLAGS=
+CXXFLAGS=-std=gnu++14
 
 # Additional / custom assembler flags.
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
 # above.
 ASFLAGS=
-
-# Additional / custom linker flags.
-LDFLAGS=
 
 # Additional / custom libraries to link in to the application.
 LDLIBS=
@@ -166,11 +163,15 @@ CY_COMPILER_PATH=
 
 MTB_SHARED_DIR=$(CY_GETLIBS_SHARED_PATH)$(CY_GETLIBS_SHARED_NAME)
 
-ML_TFLITE_MICRO_DS=$(MTB_SHARED_DIR)/ml-tflite-micro-ds/tflite-micro
+ML_TFLITE_MICRO=$(MTB_SHARED_DIR)/ml-tflite-micro/release-v2.0.0/COMPONENT_ML_TFLM_INTERPRETER
+ML_TFLITE_MICRO_INC=$(ML_TFLITE_MICRO)/include
+ML_TFLITE_MICRO_LIB=$(ML_TFLITE_MICRO)/COMPONENT_CM4/COMPONENT_IFX_CMSIS_NN/COMPONENT_HARDFP/TOOLCHAIN_GCC_ARM
 
 # Like SOURCES, but for include directories. Value should be paths to
 # directories (without a leading -I).
-INCLUDES=$(ML_TFLITE_MICRO_DS) $(ML_TFLITE_MICRO_DS)/third_party/flatbuffers/include
+INCLUDES=$(ML_TFLITE_MICRO_INC) $(ML_TFLITE_MICRO_INC)/flatbuffers/include
+
+LDFLAGS=-L$(ML_TFLITE_MICRO_LIB) -ltensorflow-microlite
 
 # Locate ModusToolbox helper tools folders in default installation
 # locations for Windows, Linux, and macOS.

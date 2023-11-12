@@ -31,7 +31,7 @@ limitations under the License.
  #define ARENA_SIZE (140*1024)
 #else
  #include "mnist_model_uint8_data.h"
- #define ARENA_SIZE (32*1024)
+ #define ARENA_SIZE (200*1024)
 #endif
 
 // Globals, used for compatibility with Arduino-style sketches.
@@ -80,7 +80,7 @@ void ai_setup() {
 
   // Build an interpreter to run the model with.
   static tflite::MicroInterpreter static_interpreter(
-      model, resolver, tensor_arena, kTensorArenaSize);
+      model, resolver, tensor_arena, kTensorArenaSize, error_reporter);
   interpreter = &static_interpreter;
 
   // Allocate memory from the tensor_arena for the model's tensors.
