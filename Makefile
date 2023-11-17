@@ -106,13 +106,13 @@ VFP_SELECT=hardfp
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
 # above.
-CFLAGS=-std=c11
+CFLAGS=
 
 # Additional / custom C++ compiler flags.
 #
 # NOTE: Includes and defines should use the INCLUDES and DEFINES variable
 # above.
-CXXFLAGS=-std=gnu++14
+CXXFLAGS=
 
 # Additional / custom assembler flags.
 #
